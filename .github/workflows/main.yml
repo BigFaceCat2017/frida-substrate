@@ -21,21 +21,20 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    
-    - name: Android NDK toolchain Setup
-    uses: ravinderjangra/android-ndk-toolchain-setup@0.2
-    with:
-      # Android API
-      api: '21' # default is 21
-      # Platform arch
-      arch: 'arm'
-      # Path to use for NDK toolchain
-      install-location: 'toolchains'
-      force: true
 
+#     - name: Android NDK toolchain Setup
+    - uses: ravinderjangra/android-ndk-toolchain-setup@0.2
+      with:
+        # Android API
+        api: '21' # default is 21
+        # Platform arch
+        arch: 'arm'
+        # Path to use for NDK toolchain
+        install-location: 'toolchains'
+        # Force install toolchain
+        force: true
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
+    - name: set ndk
       run: echo "::set-env name=ANDROID_NDK_ROOT::$ANDROID_SDK_ROOT/ndk-bundle"
 
     # Runs a set of commands using the runners shell
@@ -46,6 +45,6 @@ jobs:
         echo Add other actions to build,
         echo test, and deploy your project.
         
-      - name: check
+    - name: check
       run: |
         file ./libs/armeabi-v7a/libsubstrate.so
